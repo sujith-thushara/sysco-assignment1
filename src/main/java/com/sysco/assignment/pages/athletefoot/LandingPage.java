@@ -1,5 +1,6 @@
 package com.sysco.assignment.pages.athletefoot;
 
+import com.sysco.assignment.utils.BasePage;
 import com.syscolab.qe.core.ui.SyscoLabUI;
 import com.syscolab.qe.core.ui.web.SyscoLabWUI;
 import org.openqa.selenium.By;
@@ -7,25 +8,30 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LandingPage {
-    protected static SyscoLabUI syscoLabUIOgm;
-    LoginPage loginPage;
+public class LandingPage extends BasePage {
 
-    @FindBy(linkText = "Login") static WebElement foobar;
+    private By lnkLogin = By.xpath("//a[text()='Login']");
+    private By lnkLandingPage = By.xpath("//strong[@class='slogan']");
 
-    public static void loadLoginPage(Capabilities capabilities, String url) {
-        syscoLabUIOgm = new SyscoLabWUI(capabilities);
-        syscoLabUIOgm.navigateTo(url);
-        syscoLabUIOgm.driver.manage().window().maximize();
 
+    public void waitForLoginLink(){
+        syscoLabUIOgm.waitTillElementLoaded(lnkLogin, 3000);
     }
 
+    public void clickLoginLink(){
+        syscoLabUIOgm.click(lnkLogin);
+    }
 
+    public void loadLandingPage() {
 
-    public void quitDriver() {
-        if (syscoLabUIOgm != null) {
-            syscoLabUIOgm.quit();
+        if (!syscoLabUIOgm.getCurrentURL().equalsIgnoreCase("https://www.theathletesfoot.com.au/")) {
+            syscoLabUIOgm.clickOnVisibleElement(lnkLandingPage);
         }
+
+
     }
+
+
+
 
 }
