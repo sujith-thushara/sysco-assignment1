@@ -13,8 +13,19 @@ public class Login {
         return btnText;
     }
 
-    public static HomePage validLogin(String email, String password){
+    public static void loginAsValidUser(String email, String password){
         loginPage.setValidCredentials(email, password);
-        return new HomePage();
+        //return new HomePage();
+    }
+
+    public static String LoginAsinvalidLogin(String email, String password){
+        String errorMessage = loginPage.setInvalidCredentials(email, password);
+        return errorMessage;
+
+    }
+
+    public static void closeBrowser(){
+        loginPage.quitDriver();
+
     }
 }

@@ -29,9 +29,9 @@ public class LoginPage extends BasePage {
        return errorMessage;
     }
 
-    public HomePage setValidCredentials(String email, String password){
+    public void setValidCredentials(String email, String password){
         setCredentials(email,password);
-        return new HomePage();
+        //return new HomePage();
 
 
     }

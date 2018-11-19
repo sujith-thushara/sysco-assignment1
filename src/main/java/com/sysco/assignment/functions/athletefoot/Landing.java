@@ -1,6 +1,7 @@
 package com.sysco.assignment.functions.athletefoot;
 
 import com.sysco.assignment.common.Constants;
+import com.sysco.assignment.pages.athletefoot.HomePage;
 import com.sysco.assignment.pages.athletefoot.LandingPage;
 import com.sysco.assignment.pages.athletefoot.LoginPage;
 import com.sysco.assignment.utils.DriverSetUpUtil;
@@ -28,9 +29,15 @@ public class Landing {
     }
 
 
-    public static LoginPage clickLogin(){
+    public static void navigateToLoginPage(){
         landingPage.clickLoginLink();
-        return new LoginPage();
+        //return new LoginPage();
+    }
+
+
+
+    public static void closeBrowser(){
+        landingPage.quitDriver();
     }
 
 
