@@ -1,10 +1,7 @@
 package com.sysco.assignment.tests.athletefoot;
 
 import com.sysco.assignment.data.LoginData;
-import com.sysco.assignment.functions.athletefoot.Home;
-import com.sysco.assignment.functions.athletefoot.Landing;
-import com.sysco.assignment.functions.athletefoot.Login;
-import com.sysco.assignment.functions.athletefoot.ShoppingCart;
+import com.sysco.assignment.functions.athletefoot.*;
 import com.sysco.assignment.pages.athletefoot.LandingPage;
 import com.sysco.assignment.pages.athletefoot.LoginPage;
 import com.sysco.assignment.pages.athletefoot.ShoppingCartPage;
@@ -17,6 +14,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.util.Map;
 
 public class WebTest extends TestBase {
     SoftAssert softAssert = new SoftAssert();
@@ -66,6 +65,7 @@ public class WebTest extends TestBase {
         Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
         String userName = Home.getUserName();
         softAssert.assertEquals(userName,"william  jacob", "Expected User Name Not Found");
+        softAssert.assertAll();
         Home.closeBrowser();
 
 
@@ -82,7 +82,19 @@ public class WebTest extends TestBase {
 
     }
 
+    @Test(priority = 5)
+    public void addProductToCart(){
+        Landing.loadLandingPage();
+        Landing.navigateToLoginPage();
+        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Home.selectSubMenuAndCategory("Mens","Run");
+        Home.selectRandomItem();
+        Home.addSelectedItemToCart();
+        boolean isMatched = RightPane.verifyItemInShoppingCart();
+        softAssert.assertEquals(isMatched,true,"Contents not matched");
+        softAssert.assertAll();
 
+    }
 
 
 
