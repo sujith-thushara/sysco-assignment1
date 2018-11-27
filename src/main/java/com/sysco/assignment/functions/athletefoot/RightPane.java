@@ -2,6 +2,8 @@ package com.sysco.assignment.functions.athletefoot;
 
 import com.sysco.assignment.pages.athletefoot.RightPanePage;
 
+import java.util.Map;
+
 public class RightPane {
 
     public static RightPanePage rightPanePage = new RightPanePage();
@@ -11,6 +13,13 @@ public class RightPane {
         return isMatched;
 
     }
+
+    public static void navigateToCheckout(){
+        rightPanePage.clickProceedToCheckout();
+    }
+
+
+
 
 
 

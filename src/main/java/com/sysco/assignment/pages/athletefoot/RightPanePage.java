@@ -12,6 +12,7 @@ public class RightPanePage extends BasePage {
     private By lblItemCount = By.xpath("//div[@class='minicart-wrapper']/span/span");
     private By lblProductName = By.xpath("//div[@class='minicart-product-details']//a");
     private By imgCart = By.xpath("//div[@class='minicart-wrapper']");
+    private By btnProceedToCheckout = By.xpath("//button[@title='Proceed To Checkout']");
     HomePage homePage = new HomePage();
 
 
@@ -37,7 +38,7 @@ public class RightPanePage extends BasePage {
         String productName = items.get("Name");
         syscoLabUIOgm.waitTillElementLoaded(imgCart).click();
         String productNameInCart = syscoLabUIOgm.waitTillElementLoaded(lblProductName).getText();
-        
+
         if (productName.equalsIgnoreCase(productNameInCart)){
             System.out.println("Search content matched");
             return true;
@@ -46,4 +47,10 @@ public class RightPanePage extends BasePage {
         }
 
     }
+
+
+    public void clickProceedToCheckout(){
+        syscoLabUIOgm.click(btnProceedToCheckout);
+    }
+
 }

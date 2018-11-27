@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.lang.ref.PhantomReference;
 import java.util.Map;
 
 public class WebTest extends TestBase {
@@ -93,6 +94,40 @@ public class WebTest extends TestBase {
         boolean isMatched = RightPane.verifyItemInShoppingCart();
         softAssert.assertEquals(isMatched,true,"Contents not matched");
         softAssert.assertAll();
+
+    }
+
+    @Test(priority = 6)
+    public void verifyRequiredFIleds(){
+        Landing.loadLandingPage();
+        Landing.navigateToLoginPage();
+        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Home.selectSubMenuAndCategory("Mens","Run");
+        Home.selectRandomItem();
+        Home.addSelectedItemToCart();
+        boolean isMatched = RightPane.verifyItemInShoppingCart();
+        softAssert.assertEquals(isMatched,true,"Contents not matched");
+        softAssert.assertAll();
+        RightPane.navigateToCheckout();
+        //SecureCheckout.verifyBuyerInformation("william","jacob");
+        SecureCheckout.verifyErrorMessage();
+
+
+    }
+
+    @Test(priority = 7)
+    public void fillDeleveryInformation(){
+        Landing.loadLandingPage();
+        Landing.navigateToLoginPage();
+        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Home.selectSubMenuAndCategory("Mens","Run");
+        Home.selectRandomItem();
+        Home.addSelectedItemToCart();
+        boolean isMatched = RightPane.verifyItemInShoppingCart();
+        softAssert.assertEquals(isMatched,true,"Contents not matched");
+        softAssert.assertAll();
+        RightPane.navigateToCheckout();
+        SecureCheckout.enterPayementDetails();
 
     }
 

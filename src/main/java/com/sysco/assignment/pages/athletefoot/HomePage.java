@@ -78,11 +78,7 @@ public class HomePage extends BasePage {
 
     public Map<String, String> getProductDetails(){
 
-        System.out.println("Getting product details");
-
-
         syscoLabUIOgm.waitTillElementLoaded(lblProductPrice);
-        System.out.println("price is ..."+syscoLabUIOgm.getText(lblProductPrice));
         String productPrice=syscoLabUIOgm.getText(lblProductPrice);
 
         syscoLabUIOgm.waitTillElementLoaded(lblProductName);
