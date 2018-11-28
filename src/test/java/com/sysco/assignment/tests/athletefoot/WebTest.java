@@ -128,6 +128,9 @@ public class WebTest extends TestBase {
         softAssert.assertAll();
         RightPane.navigateToCheckout();
         SecureCheckout.enterPayementDetails();
+        SecureCheckout.selectPostCode("2000", "BARANGAROO New South Wales");
+        SecureCheckout.setPhoneNumber("222222222");
+        SecureCheckout.navigateToReviewPayments();
 
     }
 

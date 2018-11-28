@@ -27,9 +27,22 @@ public class SecureCheckout {
     public static void enterPayementDetails(){
         secureCheckoutPage.enterAddress1("street_1");
         //secureCheckoutPage.enterCity("SampleCity");
-        secureCheckoutPage.enterPostCode("2000");
+        //secureCheckoutPage.enterPostCode("2000");
 
 
+    }
+
+    public static void selectPostCode(String postCode, String state){
+        secureCheckoutPage.enterPostCode(postCode);
+        secureCheckoutPage.selectPostCode(state);
+    }
+
+    public static void setPhoneNumber(String phoneNumber){
+        secureCheckoutPage.setPhoneNumber(phoneNumber);
+    }
+
+    public static void navigateToReviewPayments(){
+        secureCheckoutPage.clickContinueBtn();
     }
 
 
