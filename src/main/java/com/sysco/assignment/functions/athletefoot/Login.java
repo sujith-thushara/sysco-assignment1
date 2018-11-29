@@ -6,7 +6,6 @@ import com.sysco.assignment.pages.athletefoot.LoginPage;
 
 public class Login {
     public static LoginPage loginPage = new LoginPage();
-    public static LandingPage landingPage = new LandingPage();
 
     public static String validateLoginBtn(){
         String btnText= loginPage.getLoginBtnText();
@@ -17,7 +16,7 @@ public class Login {
         loginPage.setValidCredentials(email, password);
     }
 
-    public static String LoginAsinvalidLogin(String email, String password){
+    public static String LoginAsInvalidLogin(String email, String password){
         String errorMessage = loginPage.setInvalidCredentials(email, password);
         return errorMessage;
 

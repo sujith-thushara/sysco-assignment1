@@ -2,6 +2,7 @@ package com.sysco.assignment.pages.athletefoot;
 
 import com.sun.xml.internal.ws.server.ServerRtException;
 import com.sysco.assignment.utils.BasePage;
+import com.syscolab.qe.core.common.LoggerUtil;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class SecureCheckoutPage extends BasePage {
         Map<String,String>buyerDetails = new HashMap<String, String>();
         buyerDetails.put("FirstName",firstName);
         buyerDetails.put("LastName",lastName);
-        System.out.println("First name is :" + buyerDetails.get("FirstName")+ "and last name is :"+ buyerDetails.get("LastName"));
+        LoggerUtil.logINFO("First name is :" + buyerDetails.get("FirstName")+ "and last name is :"+ buyerDetails.get("LastName"));
         return buyerDetails;
 
 
@@ -82,7 +83,7 @@ public class SecureCheckoutPage extends BasePage {
     public String getPaymentDetails(){
 
         String paymentDetails = syscoLabUIOgm.waitTillElementLoaded(lblPaymentDetails).getText();
-        System.out.println("printing payement details :"+paymentDetails);
+        LoggerUtil.logINFO("printing payment details :"+paymentDetails);
         return paymentDetails;
     }
 

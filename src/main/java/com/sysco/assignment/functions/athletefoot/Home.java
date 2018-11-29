@@ -1,6 +1,7 @@
 package com.sysco.assignment.functions.athletefoot;
 
 import com.sysco.assignment.pages.athletefoot.*;
+import com.syscolab.qe.core.common.LoggerUtil;
 
 import java.util.Map;
 

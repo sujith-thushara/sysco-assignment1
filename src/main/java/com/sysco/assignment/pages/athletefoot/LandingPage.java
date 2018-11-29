@@ -1,6 +1,7 @@
 package com.sysco.assignment.pages.athletefoot;
 
 import com.sysco.assignment.utils.BasePage;
+import com.syscolab.qe.core.common.LoggerUtil;
 import com.syscolab.qe.core.ui.SyscoLabUI;
 import com.syscolab.qe.core.ui.web.SyscoLabWUI;
 import org.openqa.selenium.By;
@@ -20,6 +21,7 @@ public class LandingPage extends BasePage {
 
     public void clickLoginLink(){
         syscoLabUIOgm.click(lnkLogin);
+        LoggerUtil.logINFO("user logged in");
     }
 
     public void loadLandingPage() {

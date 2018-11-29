@@ -1,6 +1,7 @@
 package com.sysco.assignment.pages.athletefoot;
 
 import com.sysco.assignment.utils.BasePage;
+import com.syscolab.qe.core.common.LoggerUtil;
 import org.openqa.selenium.By;
 
 import java.util.Map;
@@ -22,10 +23,9 @@ public class RightPanePage extends BasePage {
 
         if (className.equals("counter qty")) {
             String ttt = syscoLabUIOgm.getText(btnViewCart);
-            System.out.printf(ttt);
             syscoLabUIOgm.waitTillElementLoaded(btnViewCart).click();
         }else if (className.equals("counter qty empty")){
-            System.out.println("An Empty Cart !!!");
+            LoggerUtil.logINFO("An Empty Cart !!!");
         }
 
     }
@@ -39,7 +39,7 @@ public class RightPanePage extends BasePage {
         String productNameInCart = syscoLabUIOgm.waitTillElementLoaded(lblProductName).getText();
 
         if (productName.equalsIgnoreCase(productNameInCart)){
-            System.out.println("Search content matched");
+            LoggerUtil.logINFO("Search content matched");
             return true;
         }else  {
             return false;

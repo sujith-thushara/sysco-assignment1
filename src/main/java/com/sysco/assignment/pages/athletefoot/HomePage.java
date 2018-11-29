@@ -1,6 +1,7 @@
 package com.sysco.assignment.pages.athletefoot;
 
 import com.sysco.assignment.utils.BasePage;
+import com.syscolab.qe.core.common.LoggerUtil;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class HomePage extends BasePage {
 
     public LandingPage logout(){
         syscoLabUIOgm.click(lnkLogout);
+        LoggerUtil.logINFO("user logged out");
         return new LandingPage();
     }
 
@@ -43,7 +45,9 @@ public class HomePage extends BasePage {
     }
 
     public void clickGivenCategory(String category){
-        String categoryXpath ="//a[@title="+"'"+category+"'"+" "+"and"+" "+"@id='mi-3-2-3-1']";
+        //String categoryXpath ="//a[@title="+"'"+category+"'"+" "+"and"+" "+"@id='mi-3-2-3-1']";
+        String categoryXpath ="//*[@id='mi-3-2-3-1']";
+        syscoLabUIOgm.waitTillElementLoaded(By.xpath(categoryXpath));
         syscoLabUIOgm.click(By.xpath(categoryXpath));
 
     }
@@ -51,9 +55,7 @@ public class HomePage extends BasePage {
 
     public void clickOnRandomItem(){
         syscoLabUIOgm.waitTillElementLoaded(lnkFirstRandomItem);
-        System.out.println("start");
         syscoLabUIOgm.click(lnkFirstRandomItem);
-        System.out.println("end");
 
     }
 
@@ -66,7 +68,7 @@ public class HomePage extends BasePage {
 
     public String getProductPrice(){
         syscoLabUIOgm.waitTillElementLoaded(lblProductPrice);
-        System.out.println("price is ..."+syscoLabUIOgm.getText(lblProductPrice));
+        LoggerUtil.logINFO(("price is: "+syscoLabUIOgm.getText(lblProductPrice)));
         String productPrice=syscoLabUIOgm.getText(lblProductPrice);
         return productPrice;
 
