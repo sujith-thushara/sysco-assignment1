@@ -8,7 +8,7 @@ import java.util.Map;
 public class SecureCheckout {
 
     public static SecureCheckoutPage secureCheckoutPage = new SecureCheckoutPage();
-    public static RightPanePage rightPanePage = new RightPanePage();
+    //public static RightPanePage rightPanePage = new RightPanePage();
 
     public static boolean verifyBuyerInformation(String firstName,String lastName){
         Map<String,String> buyerInfo = secureCheckoutPage.getBuyerInfo();
@@ -26,10 +26,6 @@ public class SecureCheckout {
 
     public static void enterPayementDetails(){
         secureCheckoutPage.enterAddress1("street_1");
-        //secureCheckoutPage.enterCity("SampleCity");
-        //secureCheckoutPage.enterPostCode("2000");
-
-
     }
 
     public static void selectPostCode(String postCode, String state){
@@ -44,6 +40,16 @@ public class SecureCheckout {
     public static void navigateToReviewPayments(){
         secureCheckoutPage.clickContinueBtn();
     }
+
+    public static void selectPaymentType(){
+        secureCheckoutPage.selectPaymentType();
+    }
+
+    public static String validatePaymentDetails(){
+        String paymentDetails = secureCheckoutPage.getPaymentDetails();
+        return paymentDetails;
+    }
+
 
 
 }

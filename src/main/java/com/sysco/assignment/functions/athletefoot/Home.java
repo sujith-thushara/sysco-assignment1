@@ -11,7 +11,6 @@ public class Home {
 
     public static void logout(){
         homePage.logout();
-        //return new LoginPage();
     }
 
     public static String getUserName(){
@@ -22,7 +21,6 @@ public class Home {
     public static void navigateToShoppingCart(){
         homePage.clickShoppingCartIcon();
         rightPanePage.clickViewCart();
-        //return new ShoppingCartPage();
     }
 
     public static void selectSubMenuAndCategory(String subMenu,String category){
@@ -40,10 +38,5 @@ public class Home {
     }
 
 
-
-    public static void closeBrowser(){
-        homePage.quitDriver();
-
-    }
 
 }

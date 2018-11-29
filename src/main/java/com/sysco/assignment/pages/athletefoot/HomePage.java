@@ -11,14 +11,11 @@ public class HomePage extends BasePage {
     private By lnkLogout = By.xpath("//a[text()='Logout']");
     private By txtUserName = By.xpath("//a[text()='My account']/../../li[2]/span/span");
     private By imgShoppingCart = By.xpath("//*[@id=\"header-search\"]/following-sibling::div[3]");
-    //private By imgFirstRandomItem = By.xpath("//div[@class='product-item-info']/a/span/span/img");
-    //private By lnkFirstRandomItem = By.xpath("//div[@class='slick-slide slick-current slick-active']//div/a");
     private By lnkFirstRandomItem = By.xpath("//a[@class='product-item-link']");
     private By lblProductName = By.xpath("//div/h1/span");
     private By lblProductPrice = By.xpath("//div[@class='price-box price-final_price']/span/span/span");
     private By lblSize = By.xpath("//div[@class='swatch-row -active']/div[@class='swatch-option text']");
     private By btnAddToCart = By.id("product-addtocart-button");
-
     public static String itemPrice;
     public static String itemName;
 
@@ -36,7 +33,6 @@ public class HomePage extends BasePage {
 
     public void clickShoppingCartIcon(){
         syscoLabUIOgm.click(imgShoppingCart);
-        //a[@title='Mens']
 
     }
 
@@ -55,7 +51,9 @@ public class HomePage extends BasePage {
 
     public void clickOnRandomItem(){
         syscoLabUIOgm.waitTillElementLoaded(lnkFirstRandomItem);
+        System.out.println("start");
         syscoLabUIOgm.click(lnkFirstRandomItem);
+        System.out.println("end");
 
     }
 
@@ -92,22 +90,16 @@ public class HomePage extends BasePage {
         itemMap.put("Name",productName);
         System.out.println("Item Name is :" + itemMap.get("Name") + "and the price is" + itemMap.get("price"));
         return itemMap;
-
-
-
-
     }
 
     public void clickAddToCart(){
 
         getProductDetails();
+        syscoLabUIOgm.scrollToElement(lblSize);
         syscoLabUIOgm.waitTillElementLoaded(lblSize).click();
         syscoLabUIOgm.waitTillElementLoaded(btnAddToCart).click();
 
     }
 
 
-    public void closeBrowser(){
-        syscoLabUIOgm.quit();
-    }
 }

@@ -28,7 +28,6 @@ public class RightPanePage extends BasePage {
             System.out.println("An Empty Cart !!!");
         }
 
-
     }
 
 

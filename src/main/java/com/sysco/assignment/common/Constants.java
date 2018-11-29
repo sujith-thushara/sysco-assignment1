@@ -9,7 +9,7 @@ public class Constants {
     public static final String APP_URL = System.getProperty("app.url", "https://www.google.com");
     public static final String APP_OS = System.getProperty("app.os", "WIN10");
     public static final String APP_BROWSER = System.getProperty("app.browser", "chrome");
-    public static final String New_APP_URL = System.getProperty("app.url", "https://www.theathletesfoot.com.au/");
+        public static final String New_APP_URL = System.getProperty("app.url", "https://www.theathletesfoot.com.au/");
 
 
 }

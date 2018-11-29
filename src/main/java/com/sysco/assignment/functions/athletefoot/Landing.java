@@ -31,16 +31,7 @@ public class Landing {
 
     public static void navigateToLoginPage(){
         landingPage.clickLoginLink();
-        //return new LoginPage();
     }
-
-
-
-    public static void closeBrowser(){
-        landingPage.quitDriver();
-    }
-
-
 
 
 }

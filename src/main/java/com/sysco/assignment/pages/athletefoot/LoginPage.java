@@ -31,8 +31,6 @@ public class LoginPage extends BasePage {
 
     public void setValidCredentials(String email, String password){
         setCredentials(email,password);
-        //return new HomePage();
-
 
     }
 

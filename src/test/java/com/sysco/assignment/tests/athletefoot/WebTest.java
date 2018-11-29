@@ -5,14 +5,12 @@ import com.sysco.assignment.functions.athletefoot.*;
 import com.sysco.assignment.pages.athletefoot.LandingPage;
 import com.sysco.assignment.pages.athletefoot.LoginPage;
 import com.sysco.assignment.pages.athletefoot.ShoppingCartPage;
+import com.sysco.assignment.utils.BasePage;
 import com.sysco.assignment.utils.ExcelUtil;
 import com.sysco.assignment.utils.TestBase;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.lang.ref.PhantomReference;
@@ -20,7 +18,7 @@ import java.util.Map;
 
 public class WebTest extends TestBase {
     SoftAssert softAssert = new SoftAssert();
-    LoginPage loginPage;
+    BasePage basePage = new BasePage();
 
 
     @BeforeClass
@@ -28,23 +26,27 @@ public class WebTest extends TestBase {
         iTestContext.setAttribute("feature", "Login - ValidLogin");
     }
 
+    @AfterMethod
+    public void quitBrowser(){
+        basePage.quitDriver();
+    }
+
     @Test(priority = 1)
-    public void validateLoginPagetest(){
+    public void validateLoginPageTest(){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
         String buttonText = Login.validateLoginBtn();
         softAssert.assertEquals(buttonText,"LOGIN","Login Button is not visible");
         softAssert.assertAll();
-        Login.closeBrowser();
+
     }
 
-    @Test(priority = 2)
-    public void validLogintest(){
+    @Test(priority = 2,dataProvider = "Authentication")
+    public void validLoginTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         Home.logout();
-        Login.closeBrowser();
 
     }
 
@@ -59,35 +61,32 @@ public class WebTest extends TestBase {
 //        Login.closeBrowser();
 //    }
 
-    @Test(priority = 3)
-    public void verifyAccountNametest(){
+    @Test(priority = 3,dataProvider = "Authentication")
+    public void verifyAccountNameTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         String userName = Home.getUserName();
-        softAssert.assertEquals(userName,"william  jacob", "Expected User Name Not Found");
+        softAssert.assertEquals(userName,"WILLIAM JACOB", "Expected User Name Not Found");
         softAssert.assertAll();
-        Home.closeBrowser();
-
 
     }
 
-    @Test(priority = 4)
-    public void removeShoppingCartItemsIdExists(){
+    @Test(priority = 4,dataProvider = "Authentication")
+    public void removeShoppingCartItemsIdExistsTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         Home.navigateToShoppingCart();
         ShoppingCart.removeIfItemsExistsInCart();
-        Home.closeBrowser();
 
     }
 
-    @Test(priority = 5)
-    public void addProductToCart(){
+    @Test(priority = 5,dataProvider = "Authentication",dependsOnMethods = { "removeShoppingCartItemsIdExistsTest" })
+    public void addProductToCartTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         Home.selectSubMenuAndCategory("Mens","Run");
         Home.selectRandomItem();
         Home.addSelectedItemToCart();
@@ -97,11 +96,11 @@ public class WebTest extends TestBase {
 
     }
 
-    @Test(priority = 6)
-    public void verifyRequiredFIleds(){
+    @Test(priority = 6,dataProvider = "Authentication",dependsOnMethods = { "removeShoppingCartItemsIdExistsTest" })
+    public void verifyRequiredFieldsTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         Home.selectSubMenuAndCategory("Mens","Run");
         Home.selectRandomItem();
         Home.addSelectedItemToCart();
@@ -109,17 +108,15 @@ public class WebTest extends TestBase {
         softAssert.assertEquals(isMatched,true,"Contents not matched");
         softAssert.assertAll();
         RightPane.navigateToCheckout();
-        //SecureCheckout.verifyBuyerInformation("william","jacob");
         SecureCheckout.verifyErrorMessage();
-
 
     }
 
-    @Test(priority = 7)
-    public void fillDeleveryInformation(){
+    @Test(priority = 7,dataProvider = "Authentication",dependsOnMethods = { "removeShoppingCartItemsIdExistsTest" })
+    public void verifyDeliveryInformationTest(String email, String password){
         Landing.loadLandingPage();
         Landing.navigateToLoginPage();
-        Login.loginAsValidUser("williamjacob802@gmail.com","0okmNHY6");
+        Login.loginAsValidUser(email,password);
         Home.selectSubMenuAndCategory("Mens","Run");
         Home.selectRandomItem();
         Home.addSelectedItemToCart();
@@ -131,10 +128,17 @@ public class WebTest extends TestBase {
         SecureCheckout.selectPostCode("2000", "BARANGAROO New South Wales");
         SecureCheckout.setPhoneNumber("222222222");
         SecureCheckout.navigateToReviewPayments();
+        SecureCheckout.selectPaymentType();
+        String paymentInfo = SecureCheckout.validatePaymentDetails();
+        paymentInfo.contains("william jacob street_1 BARANGAROO, New South Wales 2000 Australia 0222 222 222");
+        softAssert.assertAll();
+
 
     }
 
+    @DataProvider(name = "Authentication")
 
-
-
+    public static Object[][] credentials() {
+        return new Object[][] { { "williamjacob802@gmail.com", "0okmNHY6" }};
+    }
 }

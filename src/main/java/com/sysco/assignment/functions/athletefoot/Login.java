@@ -15,7 +15,6 @@ public class Login {
 
     public static void loginAsValidUser(String email, String password){
         loginPage.setValidCredentials(email, password);
-        //return new HomePage();
     }
 
     public static String LoginAsinvalidLogin(String email, String password){
@@ -24,8 +23,5 @@ public class Login {
 
     }
 
-    public static void closeBrowser(){
-        loginPage.quitDriver();
 
-    }
 }
